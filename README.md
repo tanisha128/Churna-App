@@ -13,7 +13,7 @@ Supports product browsing, cart, order placement, authentication, and contact fo
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/tanisha128/ayurveda-project.git
+git clone https://github.com/tanisha128/Churna-App.git
 cd churnaapp
 
 2️⃣ Setup Backend
