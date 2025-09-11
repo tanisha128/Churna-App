@@ -1,3 +1,4 @@
+# Churna-App
 
 An Ayurveda E-commerce web application with a **React frontend** and **Node.js + Express + MongoDB backend**.  
 Supports product browsing, cart, order placement, authentication, and contact form with email integration.
@@ -35,3 +36,4 @@ npm run dev
 cd ../churnaapp
 npm install
 npm start
+
