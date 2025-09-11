@@ -1,0 +1,371 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.admin-dashboard {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #333;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+/* General styles for the table container */
+.product-table-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styles */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+/* Table header styles */
+.product-table thead {
+  background-color: lightgrey;
+  color: #ffffff;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-table th {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Table body styles */
+.product-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.product-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Input styles for editing */
+.product-table input[type="text"],
+.product-table input[type="number"],
+.product-table input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button styles */
+.product-table button {
+  padding: 8px 16px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.product-table button:hover {
+  opacity: 0.8;
+}
+
+.product-table button.save {
+  background-color: #28a745;
+  color: white;
+}
+
+.product-table button.cancel {
+  background-color: #dc3545;
+  color: white;
+}
+
+.product-table button.edit {
+  background-color: #007bff;
+  color: white;
+}
+
+.product-table button.delete {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+
+/* Image styles */
+.product-table img {
+  width: 80px;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+/* No image placeholder */
+.product-table .no-image {
+  color: #888;
+  font-style: italic;
+}
+
+.product-management {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.product-management h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.add-product {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between input fields */
+}
+
+.add-product input[type='text'],
+.add-product input[type='number'],
+.add-product input[type='file'] {
+  flex: 1; /* Allow inputs to grow and fill available space */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Include padding in total width and height */
+}
+
+.add-product input[type='text']:focus,
+.add-product input[type='number']:focus,
+.add-product input[type='file']:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.add-product button {
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-product button:hover {
+  background-color: #f8d7da;
+}
+
+/* Style for file input to look like a button */
+.add-product input[type='file'] {
+  border: none;
+  background-color: #f8f9fa;
+  color: #6c757d;
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add-product input[type='file']:hover {
+  background-color: #e9ecef;
+}
+
+
+/* Table Styles */
+.order-table
+ {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.order-table th,
+.order-table td
+ {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-table th
+ {
+  background-color: #f2f2f2;
+  font-weight: 600;
+}
+
+.order-table img
+ {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+/* Action Buttons */
+.btn {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+  background-color: #f2f2f2;
+}
+
+/* Edit and Delete Buttons */
+.btn.edit {
+  color: #28a745;
+}
+
+.btn.edit:hover {
+  background-color: #dcf8c6;
+}
+
+.btn.delete {
+  color: #dc3545;
+}
+
+.btn.delete:hover {
+  background-color: #f8d7da;
+}
+
+.status-dropdown {
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.status-dropdown.delivered {
+  background: #d4edda;
+  color: #155724;
+  font-weight: bold;
+}
+
+.status-dropdown.cancelled {
+  background: #f8d7da;
+  color: #721c24;
+  font-weight: bold;
+}
+
+.status-dropdown.processing {
+  background: #fff3cd;
+  color: #856404;
+  font-weight: bold;
+}
+
+.status-dropdown.shipped {
+  background: #cce5ff;
+  color: #004085;
+  font-weight: bold;
+}
+.dashboard-buttons {
+  background: #fd8124;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s;
+  margin-top: 3rem;
+}
+@media (max-width: 600px) {
+  .product-table,
+  .order-table,
+  .product-table thead,
+  .order-table thead,
+  .product-table tbody,
+  .order-table tbody,
+  .product-table th,
+  .order-table th,
+  .product-table td,
+  .order-table td,
+  .product-table tr,
+  .order-table tr {
+    display: block;
+    width: 98%; /* Increased from 85% to 98% */
+  }
+
+  .product-table thead tr,
+  .order-table thead tr {
+    display: none; 
+  }
+
+  .product-table tr,
+  .order-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+    /* Center the card */
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .product-table td,
+  .order-table td {
+    text-align: left;
+    padding: 8px 10px;
+    border: none;
+    position: relative;
+  }
+
+  .product-table td::before,
+  .order-table td::before {
+    content: attr(data-label);  
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+}
+
+/* Responsive for phones (Product & Order Tables) */
+
+@media (max-width: 768px) {
+  .add-product {
+    flex-direction: column;
+  }
+
+  .add-product input[type='text'],
+  .add-product input[type='number'],
+  .add-product input[type='file'],
+  .add-product button {
+    margin-bottom: 10px;
+    width: 100%; /* Full width for smaller screens */
+  }
+
+}

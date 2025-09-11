@@ -1,0 +1,67 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  background:#ffffff;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+/* Ensures the Router root has no extra space */
+#root {
+  width: 100%;
+}
+
+/* remove any stray top margin on SecondaryNav itself */
+.secondary-navbar {
+  margin-top: 0 !important;
+}
+
+/* remove any margin that React-Router <Routes> adds */
+.app-content > *:not(.navbar):not(.secondary-navbar) {
+  margin-top: 0;
+}
+
+html, body, #root {
+  height: 100%;
+   overflow: visible;
+}
+ 
+
+#root {
+  width: 100%;
+  position: relative;   
+}
+body, #root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Global layout fix */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+main {
+  flex: 1; /* pushes footer down */
+  display: block;
+}
+
+footer {
+  width: 100%;
+  background: #e8f5e9;
+  color: #305724;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: auto; /* ensures footer stays at bottom */
+}
+
