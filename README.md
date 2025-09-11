@@ -37,3 +37,26 @@ cd ../churnaapp
 npm install
 npm start
 
+cd churnaapp
+
+2️⃣ Setup Backend
+cd backend
+npm install
+
+Create a .env file inside backend/:
+
+PORT=8000
+URL=your-mongodb-url
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password
+ADMIN_EMAIL=admin@churna.com
+ADMIN_PASSWORD=yourpassword
+
+Start backend:
+npm run dev
+
+3️⃣ Setup Frontend
+cd ../churnaapp
+npm install
+npm start
+
