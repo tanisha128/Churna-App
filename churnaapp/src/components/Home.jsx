@@ -14,11 +14,17 @@ const carouselProducts = [
 const ProductCard = ({ product, addToCart }) => {
  let imageSrc = product.image_url || product.image || product.img || null;
 
+ const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/products'
+  : 'http://localhost:5000/api/products';
 
- // If it's a local path, prepend backend server URL
-if (imageSrc && !imageSrc.startsWith("http")) {
-  imageSrc = imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`;
-}
+fetch(API_URL)
+
+
+  // If it's a local path, prepend backend server URL
+  if (imageSrc && !imageSrc.startsWith("http")) {
+    imageSrc = `${imageSrc}`;
+  }
 
    const outOfStock = product.stock === 0;
 
