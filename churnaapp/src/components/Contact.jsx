@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import './contact.css';
 
 export default function Contact() {
+   const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/contact'
+  : 'http://localhost:5000/api/contact';
+
+fetch(API_URL)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -22,7 +27,7 @@ export default function Contact() {
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch('http://localhost:5000/api/contact', {
+    const response = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

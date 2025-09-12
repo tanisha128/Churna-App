@@ -22,9 +22,9 @@ fetch(API_URL)
 
 
   // If it's a local path, prepend backend server URL
-  if (imageSrc && !imageSrc.startsWith("http")) {
-    imageSrc = `${imageSrc}`;
-  }
+ if (imageSrc && !imageSrc.startsWith("http")) {
+  imageSrc = imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`;
+}
 
    const outOfStock = product.stock === 0;
 

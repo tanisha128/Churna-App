@@ -3,6 +3,12 @@ import API from './api';
 import './adminDash.css';
 
 export default function OrdersDashboard() {
+ const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/orders'
+  : 'http://localhost:5000/api/orders';
+
+fetch(API_URL)
+
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -26,7 +32,7 @@ export default function OrdersDashboard() {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${id}`, {
+      const res = await fetch(`/api/orders/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

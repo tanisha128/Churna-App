@@ -7,9 +7,14 @@ export default function CategoryPage() {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+   const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/products'
+  : 'http://localhost:5000/api/products';
+
+fetch(API_URL)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/category/${name}`)
+    fetch(`/api/products/category/${name}`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));
