@@ -29,6 +29,12 @@ app.use("/api/products",productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 
+const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/products'
+  : 'http://localhost:5000/api/products';
+
+fetch(API_URL)
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "dist")));
 

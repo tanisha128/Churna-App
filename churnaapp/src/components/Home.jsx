@@ -15,10 +15,10 @@ const ProductCard = ({ product, addToCart }) => {
  let imageSrc = product.image_url || product.image || product.img || null;
 
 
-  // If it's a local path, prepend backend server URL
-  if (imageSrc && !imageSrc.startsWith("http")) {
-    imageSrc = `http://localhost:5000${imageSrc}`;
-  }
+ // If it's a local path, prepend backend server URL
+if (imageSrc && !imageSrc.startsWith("http")) {
+  imageSrc = imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`;
+}
 
    const outOfStock = product.stock === 0;
 
@@ -69,7 +69,7 @@ export default function Home() {
   useEffect(() => {
     if (searchResults.length === 0) {
       // fetch all products only if not searching
-      fetch("http://localhost:5000/api/products")
+      fetch("/api/products")
         .then((res) => res.json())
         .then((data) => setProducts(data))
         .catch((err) => console.error("Fetch error:", err));
