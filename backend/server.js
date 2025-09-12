@@ -14,24 +14,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
-
-// Configure nodemailer transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS  
-  }
-});
-
-// ✅ Serve React build in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../churnaapp/build")));
+  app.use(express.static(path.join(__dirname, "dist")));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../churnaapp/build", "index.html"));
+    res.sendFile(path.join(__dirname, "dist", "index.html"));
   });
 }
+
+
 
 
 // Middleware
@@ -47,6 +38,16 @@ app.use("/pictures", express.static(path.join(__dirname, "pictures")));
 app.use("/api/products",productRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
+
+// Configure nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS  
+  }
+});
+
 
 
 
