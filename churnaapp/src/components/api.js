@@ -1,4 +1,4 @@
-const API = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000/api";
+const API = process.env.REACT_APP_BACKEND_URL;
 
 // Helper to attach token
 export function authHeaders() {

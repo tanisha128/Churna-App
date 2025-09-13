@@ -10,6 +10,7 @@ export default function Order() {
   const [customerEmail, setCustomerEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const totalAmount = cartItems.reduce(
     (sum, item) => sum + Number(item.price.toString().replace("₹", "")) * (item.qty || 1),
@@ -19,6 +20,13 @@ export default function Order() {
   const navigate = useNavigate();
 
   const placeOrder = async () => {
+    if (!customerName || !customerEmail || !address || !phone) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     const orderData = {
       customer: {
         name: customerName,
@@ -31,7 +39,7 @@ export default function Order() {
         const cleanQty = Number(it.qty) || 1;
 
         return {
-          product: it._id || it.id, // backend expects ObjectId here
+          product: it._id || it.id, 
           name: it.name,
           price: cleanPrice,
           image_url: it.image,
@@ -48,6 +56,8 @@ export default function Order() {
     } catch (error) {
       console.error("Error placing order:", error);
       alert("Failed to place order. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -61,24 +71,28 @@ export default function Order() {
           placeholder="Full Name"
           value={customerName}
           onChange={(e) => setCustomerName(e.target.value)}
+          required
         />
         <input
           type="email"
           placeholder="Email"
           value={customerEmail}
           onChange={(e) => setCustomerEmail(e.target.value)}
+          required
         />
         <input
           type="text"
           placeholder="Delivery Address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          required
         />
         <input
           type="text"
           placeholder="Phone Number"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
+          required
         />
       </div>
 
@@ -96,7 +110,7 @@ export default function Order() {
             </li>
           ))}
         </ul>
-         <p className="total">Total: ₹{totalAmount.toFixed(2)}</p>
+        <p className="total">Total: ₹{totalAmount.toFixed(2)}</p>
       </div>
 
       <div className="payment">
@@ -106,8 +120,12 @@ export default function Order() {
         </label>
       </div>
 
-      <button onClick={placeOrder} className="confirm-order-button">
-        Confirm Order
+      <button
+        onClick={placeOrder}
+        className="confirm-order-button"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? "Placing Order..." : "Confirm Order"}
       </button>
     </div>
   );
