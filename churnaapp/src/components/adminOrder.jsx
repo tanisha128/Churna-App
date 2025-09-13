@@ -83,7 +83,7 @@ export default function OrdersDashboard() {
                   ))}
                 </td>
                 <td>₹{typeof order.total === "number" ? order.total.toFixed(2) : "0.00"}</td>
-                <td>₹{order.total?.toFixed(2) || "0.00"}</td>
+                
                 <td>
                   <select
                     value={order.status}
