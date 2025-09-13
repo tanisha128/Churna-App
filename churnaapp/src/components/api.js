@@ -1,4 +1,4 @@
-const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000/api';
+const API = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000/api";
 
 // Helper to attach token
 export function authHeaders() {
@@ -24,31 +24,27 @@ export default {
         headers: { ...authHeaders() },
       }).then((r) => r.json()),
 
-  create: (formData) => {
-  return fetch("http://localhost:5000/api/products", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`, 
-    },
-    body: JSON.stringify(formData),
-  }).then(r => r.json());
-},
+    create: (formData) =>
+      fetch(`${API}/products`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(formData),
+      }).then((r) => r.json()),
 
-
- update: (id, data) => {
+    update: (id, data) => {
       let headers = { ...authHeaders() };
-
       const isFormData = data instanceof FormData;
-       if (isFormData) {
-         headers = { ...authHeaders() };
-       } else {
-         headers = { "Content-Type": "application/json", ...authHeaders() };
-       }
+
+      if (!isFormData) {
+        headers = { "Content-Type": "application/json", ...authHeaders() };
+      }
 
       return fetch(`${API}/products/${id}`, {
         method: "PUT",
-        headers: headers,
+        headers,
         body: isFormData ? data : JSON.stringify(data),
       }).then((r) => {
         if (!r.ok) {
@@ -57,6 +53,7 @@ export default {
         return r.json();
       });
     },
+
     remove: (id) =>
       fetch(`${API}/products/${id}`, {
         method: "DELETE",
@@ -71,34 +68,32 @@ export default {
       }).then((r) => r.json()),
   },
 
+  // ================= ORDERS =================
+  orders: {
+    list: () =>
+      fetch(`${API}/orders`, {
+        headers: { ...authHeaders() },
+      }).then((r) => r.json()),
 
- // ================= ORDERS =================
+    create: (data) =>
+      fetch(`${API}/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).then((r) => r.json()),
 
-  // Create a new order (used in Order.jsx)
-orders: {
-  list: () => fetch(`${API}/orders`).then(r => r.json()),
+    updateStatus: (id, status) =>
+      fetch(`${API}/orders/${id}/status`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", ...authHeaders() },
+        body: JSON.stringify({ status }),
+      }).then((r) => r.json()),
 
-  create: (data) => fetch(`${API}/orders`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  }).then(r => r.json()),
-  
- updateStatus: (id, status) =>
-    fetch(`${API}/orders/${id}/status`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json", ...authHeaders() },
-      body: JSON.stringify({ status }),
-    }).then(r => r.json()),
-
-
-  // Delete order (admin)
-  delete: (id) =>
-    fetch(`${API}/orders/${id}`, {
-      method: "DELETE",
-      headers: { ...authHeaders() },
-    }).then((r) => r.json()),
-},
-}
-
+    delete: (id) =>
+      fetch(`${API}/orders/${id}`, {
+        method: "DELETE",
+        headers: { ...authHeaders() },
+      }).then((r) => r.json()),
+  },
+};
 
