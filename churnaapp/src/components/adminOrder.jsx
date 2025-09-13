@@ -3,17 +3,16 @@ import API from './api';
 import './adminDash.css';
 
 export default function OrdersDashboard() {
- const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/orders'
-  : 'http://localhost:5000/api/orders';
-
-fetch(API_URL)
-
-  const [orders, setOrders] = useState([]);
+const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     fetchOrders();
   }, []);
+
+  const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/orders'
+  : 'http://localhost:5000/api/orders';
+  fetch(API_URL)
 
   const fetchOrders = async () => {
     try {

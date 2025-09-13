@@ -32,7 +32,7 @@ const handleSubmit = async (e) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         firstName: formData.firstName,
-        lastName: formData.lastName || '', // Ensure lastName is included, even if empty
+        lastName: formData.lastName || '', 
         email: formData.email,
         phoneNumber: formData.phoneNumber,
         subject: formData.subject,
