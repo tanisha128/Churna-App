@@ -2,6 +2,8 @@ import API from './api';
 import { useState, useEffect } from 'react';
 import './adminDash.css';
 import {Link} from "react-router-dom";
+import { API_URL } from './config';
+import React from 'react';
 
 
 export default function AdminDashboard() {
@@ -16,18 +18,13 @@ export default function AdminDashboard() {
     fetchProducts();
   }, [editingProduct]);
 
-  const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/products'
-  : 'http://localhost:5000/api/products';
-
-fetch(API_URL)
 
   //-----------------------------------------------------------
   // Products Section
   //-----------------------------------------------------------
    const fetchProducts = async () => {
     try {
-      const res = await fetch("/api/products");
+      const res = await fetch(`${API_URL}/products`);
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -49,14 +46,14 @@ const handleAddProduct = async () => {
       
     };
 
-    const res = await fetch("/api/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // include token!
-      },
-      body: JSON.stringify(productData),
-    });
+const res = await fetch(`${API_URL}/products`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+  body: JSON.stringify(productData),
+});
 
     const data = await res.json();
 
@@ -97,7 +94,7 @@ const handleUpdateProduct = async (id) => {
       formData = JSON.stringify(updateData);
     }
 
-    const res = await fetch(`/api/products/${id}`, {
+    const res = await fetch(`${API_URL}/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": formData instanceof FormData ? "" : "application/json",
@@ -124,7 +121,7 @@ const handleUpdateProduct = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`/api/products/${id}`, {
+    const res = await fetch(`${API_URL}/products/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -159,7 +156,7 @@ const handleUpdateImage = async (id, file) => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await fetch(`/api/products/${id}/image/local`, {
+    const res = await fetch(`${API_URL}/products/${id}/image/local`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` }, 
       body: formData,

@@ -2,19 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./CategoryPage.css";
 import { useCart } from "./CartContext";
+import { API_URL } from "./config";
 
 export default function CategoryPage() {
   const { name } = useParams();
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
-   const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/products'
-  : 'http://localhost:5000/api/products';
 
-fetch(API_URL)
 
   useEffect(() => {
-    fetch(`/api/products/category/${name}`)
+    fetch(`${API_URL}/products/category/${name}`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));

@@ -3,6 +3,7 @@ import { useCart } from '../components/CartContext';
 import './home.css';
 import { useState } from 'react';
 import { useSearch } from './SearchContext';
+import { API_URL } from './config';
 
 const carouselProducts = [
   { id: 1, name: 'Its not only Medicinal use... Its also use for Healthy Health', img: 'https://static.vecteezy.com/system/resources/previews/027/688/162/non_2x/spices-and-herbs-on-top-of-wooden-table-free-photo.jpg '},
@@ -14,19 +15,9 @@ const carouselProducts = [
 const ProductCard = ({ product, addToCart }) => {
  let imageSrc = product.image_url || product.image || product.img || null;
 
- const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/products'
-  : 'http://localhost:5000/api/products';
-
-fetch(API_URL)
-
-const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
 if (imageSrc && !imageSrc.startsWith("http")) {
-  // Ensure leading slash
-  imageSrc = imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`;
-  // Prepend backend domain
-  imageSrc = `${BASE_URL}${imageSrc}`;
+  imageSrc = `${API_URL.replace("/api", "")}${imageSrc}`;
 }
 
 
@@ -76,17 +67,21 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const { searchResults } = useSearch();
 
-  useEffect(() => {
-    if (searchResults.length === 0) {
-      // fetch all products only if not searching
-      fetch("/api/products")
-        .then((res) => res.json())
-        .then((data) => setProducts(data))
-        .catch((err) => console.error("Fetch error:", err));
-    } else {
-      setProducts(searchResults); 
-    }
-  }, [searchResults]);
+ useEffect(() => {
+  if (searchResults.length === 0) {
+    fetch(`${API_URL}/products`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("Fetch error:", err));
+  } else {
+    setProducts(searchResults); 
+  }
+}, [searchResults]);
 
   useEffect(() => {
     const timer = setInterval(() => {

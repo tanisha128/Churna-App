@@ -4,23 +4,19 @@ import './navbar.css';
 import { useCart } from './CartContext'; 
 import { useSearch } from './SearchContext';
 import './SearchContext';
-
+import { API_URL } from './config';
 
 export default function Navbar() {
   const [searchTerm, setSearchTerm] = useState("");
   const { searchResults, setSearchResults } = useSearch(); 
   const { cartCount } = useCart();
 
-   const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/products'
-  : 'http://localhost:5000/api/products';
 
-fetch(API_URL)
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length > 1) {
-      fetch(`/api/products?search=${e.target.value}`)
+      fetch(`${API_URL}/products?search=${e.target.value}`)
         .then((res) => res.json())
         .then((data) => setSearchResults(data)) 
         .catch((err) => console.error(err));

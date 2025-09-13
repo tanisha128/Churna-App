@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "./CartContext";
 import './productdetails.css';
+import { API_URL } from "./config";
 
 
 
@@ -11,14 +12,10 @@ export default function ProductDetail() {
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-   const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/products'
-  : 'http://localhost:5000/api/products';
-
-fetch(API_URL)
+ 
 
   useEffect(() => {
-    fetch(`/api/products/${productId}`)
+    fetch(`${API_URL}/products/${productId}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
