@@ -105,7 +105,7 @@ const handleSubmit = async (e) => {
         </div>
 
         <div className="hero-image">
-          <img src="https://www.netmeds.com/images/cms/wysiwyg/blog/2019/08/Abhayarishtam_Benefits_big_898_5.jpg" alt="Contact illustration" />
+          <img src="https://img.freepik.com/premium-photo/indian-ayurvedic-triphala-churan-trifala-powder-is-ancient-medicine-bowel-movement-indigestion-problems-selective-focus_466689-26671.jpg" alt="Contact illustration" />
         </div>
       </div>
 
