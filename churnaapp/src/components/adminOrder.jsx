@@ -5,10 +5,6 @@ import './adminDash.css';
 export default function OrdersDashboard() {
   const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
   const fetchOrders = async () => {
     try {
       const data = await API.orders.list();
@@ -21,6 +17,10 @@ export default function OrdersDashboard() {
       console.error("Error fetching orders:", error);
     }
   };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
   const handleDeleteOrder = async (id) => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
@@ -40,7 +40,9 @@ export default function OrdersDashboard() {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       const updated = await API.orders.updateStatus(orderId, newStatus);
-      setOrders(orders.map(o => o._id === orderId ? updated : o));
+      setOrders(orders.map(o => 
+        o._id === orderId ? { ...o, ...updated } : o
+      ));
     } catch (err) {
       console.error("Failed to update status", err);
     }
@@ -80,6 +82,7 @@ export default function OrdersDashboard() {
                     </div>
                   ))}
                 </td>
+                <td>₹{typeof order.total === "number" ? order.total.toFixed(2) : "0.00"}</td>
                 <td>₹{order.total?.toFixed(2) || "0.00"}</td>
                 <td>
                   <select
@@ -87,7 +90,7 @@ export default function OrdersDashboard() {
                     onChange={(e) =>
                       handleStatusChange(order._id, e.target.value)
                     }
-                    className={`status-dropdown ${order.status}`}
+                    className={`status-dropdown ${String(order.status).replace(/[^a-z0-9_-]/gi, '').toLowerCase()}`}
                   >
                     <option value="placed">Placed</option>
                     <option value="processing">Processing</option>
@@ -98,6 +101,7 @@ export default function OrdersDashboard() {
                 </td>
                 <td>
                   <button
+                    type="button"
                     onClick={() => handleDeleteOrder(order._id)}
                     className="btn"
                   >
