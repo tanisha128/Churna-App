@@ -11,10 +11,16 @@ export default function Navbar() {
   const { searchResults, setSearchResults } = useSearch(); 
   const { cartCount } = useCart();
 
+   const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/products'
+  : 'http://localhost:5000/api/products';
+
+fetch(API_URL)
+
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length > 1) {
-      fetch(`http://localhost:5000/api/products?search=${e.target.value}`)
+      fetch(`/api/products?search=${e.target.value}`)
         .then((res) => res.json())
         .then((data) => setSearchResults(data)) 
         .catch((err) => console.error(err));

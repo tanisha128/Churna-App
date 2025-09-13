@@ -11,9 +11,14 @@ export default function ProductDetail() {
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+   const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/products'
+  : 'http://localhost:5000/api/products';
+
+fetch(API_URL)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${productId}`)
+    fetch(`/api/products/${productId}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -30,7 +35,7 @@ export default function ProductDetail() {
 
   let imageSrc = product.image_url || product.image;
   if (imageSrc && !imageSrc.startsWith("http")) {
-    imageSrc = `http://localhost:5000${imageSrc}`;
+    imageSrc = `${imageSrc}`;
   }
 
   return (

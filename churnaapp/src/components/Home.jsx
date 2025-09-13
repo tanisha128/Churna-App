@@ -20,11 +20,15 @@ const ProductCard = ({ product, addToCart }) => {
 
 fetch(API_URL)
 
+const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
-  // If it's a local path, prepend backend server URL
- if (imageSrc && !imageSrc.startsWith("http")) {
+if (imageSrc && !imageSrc.startsWith("http")) {
+  // Ensure leading slash
   imageSrc = imageSrc.startsWith("/") ? imageSrc : `/${imageSrc}`;
+  // Prepend backend domain
+  imageSrc = `${BASE_URL}${imageSrc}`;
 }
+
 
    const outOfStock = product.stock === 0;
 

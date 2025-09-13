@@ -9,9 +9,15 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+   const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/auth/admin'
+  : 'http://localhost:5000/api/auth/admin';
+
+fetch(API_URL)
+
   const handleLogin = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/admin", {
+      const res = await fetch("/api/auth/admin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

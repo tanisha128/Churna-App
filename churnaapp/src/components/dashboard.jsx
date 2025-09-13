@@ -17,14 +17,18 @@ export default function AdminDashboard() {
     fetchProducts();
   }, [editingProduct]);
 
- 
+  const API_URL = process.env.NODE_ENV === 'production'
+  ? '/api/products'
+  : 'http://localhost:5000/api/products';
+
+fetch(API_URL)
 
   //-----------------------------------------------------------
   // Products Section
   //-----------------------------------------------------------
    const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch("/api/products");
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -46,7 +50,7 @@ const handleAddProduct = async () => {
       
     };
 
-    const res = await fetch("http://localhost:5000/api/products", {
+    const res = await fetch("/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +98,7 @@ const handleUpdateProduct = async (id) => {
       formData = JSON.stringify(updateData);
     }
 
-    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+    const res = await fetch(`/api/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": formData instanceof FormData ? "" : "application/json",
@@ -121,7 +125,7 @@ const handleUpdateProduct = async (id) => {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+    const res = await fetch(`/api/products/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -156,7 +160,7 @@ const handleUpdateImage = async (id, file) => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await fetch(`http://localhost:5000/api/products/${id}/image/local`, {
+    const res = await fetch(`/api/products/${id}/image/local`, {
       method: "PUT",
       headers: { Authorization: `Bearer ${token}` }, 
       body: formData,
@@ -308,7 +312,7 @@ const handleUpdateImage = async (id, file) => {
         <td>
           {product.image_url ? (
             <img
-              src={`http://localhost:5000${product.image_url || product.image || product.img}`}
+              src={`${product.image_url || product.image || product.img}`}
               alt={product.name}
               width="80"
             />
