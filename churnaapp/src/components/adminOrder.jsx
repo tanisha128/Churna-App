@@ -9,10 +9,7 @@ const [orders, setOrders] = useState([]);
     fetchOrders();
   }, []);
 
-  const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api/orders'
-  : 'http://localhost:5000/api/orders';
-  fetch(API_URL)
+
 
   const fetchOrders = async () => {
     try {
