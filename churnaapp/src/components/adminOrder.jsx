@@ -17,7 +17,7 @@ fetch(API_URL)
 
   const fetchOrders = async () => {
     try {
-      const data = await API_URL.orders.list();
+      const data = await API.orders.list();
       if (Array.isArray(data)) {
         setOrders(data);
       } else {
