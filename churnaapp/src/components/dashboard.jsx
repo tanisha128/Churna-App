@@ -9,8 +9,7 @@ export default function AdminDashboard() {
   const [newProduct, setNewProduct] = useState({ name: '', price: '', category: '', stock:'', image_url:'' });
   const [editingProduct, setEditingProduct] = useState(null);
   const [editData, setEditData] = useState({ name: '', price: '', category: '' , stock:'', image_url:'' });
- 
-  const [stock, setStock] = useState(0);
+ const [stock, setStock] = useState(0); 
 
   // fetch products + orders on mount
   useEffect(() => {

@@ -3,13 +3,11 @@ import API from './api';
 import './adminDash.css';
 
 export default function OrdersDashboard() {
-const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     fetchOrders();
   }, []);
-
-
 
   const fetchOrders = async () => {
     try {
@@ -28,14 +26,11 @@ const [orders, setOrders] = useState([]);
     if (!window.confirm("Are you sure you want to delete this order?")) return;
 
     try {
-      const res = await fetch(`/api/orders/${id}`, {
-        method: "DELETE",
-      });
-      if (res.ok) {
-        setOrders(orders.filter((o) => o._id !== id)); 
+      const res = await API.orders.delete(id);  
+      if (res && !res.error) {
+        setOrders(orders.filter((o) => o._id !== id));
       } else {
-        const data = await res.json();
-        alert("❌ Failed to delete: " + data.message);
+        alert("❌ Failed to delete order");
       }
     } catch (error) {
       console.error("Error deleting order:", error);
