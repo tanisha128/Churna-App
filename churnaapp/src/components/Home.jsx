@@ -14,12 +14,9 @@ const carouselProducts = [
 
 const ProductCard = ({ product, addToCart }) => {
  let imageSrc = product.image_url || product.image || product.img || null;
-
-
 if (imageSrc && !imageSrc.startsWith("http")) {
   imageSrc = `${API_URL.replace("/api", "")}${imageSrc}`;
 }
-
 
    const outOfStock = product.stock === 0;
     const [quantity, setQuantity] = useState(1); 
@@ -93,8 +90,9 @@ export default function Home() {
   const { searchResults } = useSearch();
 
  useEffect(() => {
+  const url = `${API_URL}/products`;
   if (searchResults.length === 0) {
-    fetch(`${API_URL}/products`)
+    fetch(url)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);
