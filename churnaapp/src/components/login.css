@@ -8,6 +8,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-bottom: 1.5rem;
+  margin-top: 150px;
 }
 
 /* Styling for the login heading */
@@ -58,4 +59,31 @@
   margin-top: 1rem;
   color: #305724;
   font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .admin {
+    
+    padding-top: 14rem;
+ margin: 1rem;
+    max-width: 100%;
+  }
+  .admin h2 {
+    font-size: 1.5rem;
+
+  }
+  .admin button {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    color: #fff;
+    background-color: #fd8124;
+    cursor: pointer;
+  }
+  .admin button:hover {
+  background-color: #e66b1c;
+}
+
 }

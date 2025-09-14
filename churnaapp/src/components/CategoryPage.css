@@ -4,6 +4,7 @@
   font-weight: bold;
   margin: 2rem 0 1rem;
   color: #305724;
+  margin-top: 150px;
 }
 
 .product {
@@ -45,6 +46,12 @@
   margin-bottom: 0.8rem;
   color: #305724;
 }
+.description {
+   font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: #305724;
+}
 
 .add-btn {
   width: 90%;
@@ -62,4 +69,23 @@
 .add-btn:hover {
   background: #e6904f;
 }
+
+.cart-message-badge {
+  position: fixed;
+  margin-top: 3px;
+  right: 20px;
+  background: #28a745;
+  color: #fff;
+  padding: 0.6rem 1 rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  .category-title {
+    font-size: 2rem;
+    margin-top: 230px;
+  }
+}
+  
 

@@ -6,7 +6,8 @@
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
+  margin-top: 10px;
+  }
 
 .order-page h1 {
   font-size: 2rem;
@@ -111,5 +112,12 @@
 
 .confirm-order-button:active {
   transform: scale(0.98);
+}
+
+@media (max-width: 600px) {
+  .order-page {
+    padding: 20px;
+    margin-top: 90px;
+  }
 }
 

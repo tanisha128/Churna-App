@@ -31,6 +31,11 @@
   flex: 1;
 }
 
+.cart-item p {
+  margin: 0;
+  color: black;
+}
+
 .remove-btn {
   background: transparent;
   border: none;
@@ -64,11 +69,15 @@
   background: #f48a38;
   color: black;
 }
-@media (max-width:768) {
+@media (max-width:760px) {
   .cart-page h1 {
     font-size: 1.5rem;
     text-align: center;
+    padding-top: 50px;
+   
   }
-  
+  .cart-page {
+    margin-top: 30px;
+  }  
   
 }

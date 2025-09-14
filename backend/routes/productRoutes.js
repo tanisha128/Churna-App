@@ -51,12 +51,20 @@ router.get("/", async (req, res) => {
     const products = await Product.find({
       name: { $regex: search, $options: "i" } 
     });
-    res.status(200).json(products);
+
+    // normalize _id → id
+    const normalized = products.map(p => ({
+      ...p.toObject(),
+      id: p._id.toString(), // keep consistent
+    }));
+
+    res.status(200).json(normalized);
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).json({ error: error.message });
   }
 });
+
 
 // Get products by category
 router.get("/category/:categoryName", async (req, res) => {

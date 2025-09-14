@@ -1,14 +1,15 @@
 .product-detail {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.25s;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.25s;
+    margin-top: 130px; /* Adjust this value to match your navbar height */
 }
 
 .detail-info:hover {
@@ -56,6 +57,7 @@ background: #e6904f;
         padding: 1rem;
         gap: 1rem;
         padding-bottom: 20rem; /* <-- Add this line */
+        margin-top: 200px;
     }
     .product-detail img {
         height: 150px;

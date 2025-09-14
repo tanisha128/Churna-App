@@ -12,6 +12,7 @@
   align-items: center;
   gap: 3rem;
   margin-bottom: 3rem;
+  margin-top: 10px;
 }
 
 .hero-text {
@@ -111,6 +112,7 @@
   .contact-hero {
     flex-direction: column;
     text-align: center;
+    margin-top: 50px;
   }
 
   .double-input {

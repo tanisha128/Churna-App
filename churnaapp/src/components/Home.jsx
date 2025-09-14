@@ -22,6 +22,19 @@ if (imageSrc && !imageSrc.startsWith("http")) {
 
 
    const outOfStock = product.stock === 0;
+    const [quantity, setQuantity] = useState(1); 
+
+     const handleIncrement = () => {
+    if (quantity < product.stock) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   return (
     <div className='product-card'>
@@ -38,7 +51,7 @@ if (imageSrc && !imageSrc.startsWith("http")) {
   <img src="/default.png" alt="default product" />
 )}
 
-   {/* Out of Stock Badge */}
+ 
       {outOfStock && (
         <span className="out-of-stock-badge">
           Out of Stock
@@ -48,8 +61,20 @@ if (imageSrc && !imageSrc.startsWith("http")) {
       <h3>{product.name}</h3>
       <p className="description">{product.description}</p> 
       <p className='price'>₹{product.price}</p>
+      {/* Quantity Selector */}
+      <div className="quantity-selector">
+        <button onClick={handleDecrement} className="quantity-btn" disabled={quantity <= 1}>
+          -
+        </button>
+        <span className="quantity-value">{quantity}</span>
+        <button onClick={handleIncrement} className="quantity-btn" disabled={quantity >= product.stock}>
+          +
+        </button>
+      </div>
+
+      
        <button
-        onClick={() => addToCart(product)}
+          onClick={() => addToCart({ ...product, qty: quantity })}
         className="add-btn"
         disabled={outOfStock}
       >
@@ -109,18 +134,13 @@ export default function Home() {
     ))}
   </div>
 
-  {/* ✅ Fixed caption below carousel */}
+  
   <div className='hero-caption-below'>
     <h2>Its not only Medicinal use... Its also use for Healthy Health</h2>
   </div>
 
-
-
-      
-
-  
-<div className="product">
-  <h1>Our Products</h1>
+       <div className="product">
+         <h1>Our Products</h1>
   {(searchResults.length > 0 ? searchResults : products).map((p) => (
     <ProductCard key={p._id} product={p} addToCart={addToCart} />
   ))}

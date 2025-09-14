@@ -7,7 +7,10 @@
   background: #ffffff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
   flex-wrap: wrap;
-  position: relative;
+  position: fixed;
+  top: 80px; 
+  left: 0;
+  z-index: 999;
 }
 
 .nav-link {
@@ -61,5 +64,5 @@
 }
 
 .dropdown-menu li a:hover {
-  background: #faf7f2;
+  background: #f0c883;
 }

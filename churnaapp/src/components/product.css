@@ -34,7 +34,7 @@
 .price {
   font-weight: 700;
   font-size: 1.1rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
   color: #305724;
 }
 
@@ -53,4 +53,44 @@
 
 .add-btn:hover {
   background: #e6904f;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-top: 10px; /* Reduced margin-top */
+  justify-content: center;
+}
+
+.quantity-btn {
+  background-color: #ccc;
+  color: white;
+  border: none;
+  padding: 2.5px 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  
+}
+
+.quantity-btn:hover {
+  background-color: #bbb;
+}
+
+.quantity-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #777;
+}
+
+.quantity-value {
+  font-size: 1rem;
+  margin: 0 10px;
+  padding: 2.5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+  width: 40px;
+  color: #333;
 }

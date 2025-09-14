@@ -14,6 +14,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  margin-top: 150px;
 }
 
 h1, h2 {
@@ -23,11 +24,18 @@ h1, h2 {
 h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  margin-top: 150px;
 }
 
 h2 {
   font-size: 2rem;
   margin-bottom: 15px;
+}
+
+.admin-dashboard h1 {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  
 }
 
 /* General styles for the table container */
@@ -38,6 +46,7 @@ h2 {
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
 
 /* Table styles */
@@ -46,6 +55,7 @@ h2 {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
+  
 }
 
 /* Table header styles */
@@ -207,7 +217,7 @@ h2 {
  {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .order-table th,
@@ -315,7 +325,7 @@ h2 {
   .product-table tr,
   .order-table tr {
     display: block;
-    width: 98%; /* Increased from 85% to 98% */
+    width: 98%; 
   }
 
   .product-table thead tr,
@@ -330,7 +340,6 @@ h2 {
     border-radius: 8px;
     padding: 10px;
     background: #fff;
-    /* Center the card */
     margin-left: auto;
     margin-right: auto;
   }
@@ -367,5 +376,9 @@ h2 {
     margin-bottom: 10px;
     width: 100%; /* Full width for smaller screens */
   }
+  .admin-dashboard h1 {
+    margin-top: 70px;
 
+  }
+  
 }

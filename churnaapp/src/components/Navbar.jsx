@@ -25,7 +25,7 @@ export default function Navbar() {
     }
   };
 
-  // 👇 function to clear after clicking
+  
   const handleResultClick = () => {
     setSearchTerm('');
     setSearchResults([]);
@@ -50,7 +50,7 @@ export default function Navbar() {
               <Link 
                 key={product._id} 
                 to={`/product/${product._id}`} 
-                onClick={handleResultClick} // ✅ clear search after click
+                onClick={handleResultClick} 
               >
                 <div className="result-item">
                   {product.name} - ₹{product.price}
