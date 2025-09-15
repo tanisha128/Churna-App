@@ -69,11 +69,11 @@ app.post("/api/contact", (req, res) => {
 // ================= SERVE FRONTEND =================
 if (process.env.NODE_ENV === "production") {
   // Serve the React build folder
-  app.use(express.static(path.join(__dirname, "churnaapp/dist")));
+  app.use(express.static(path.join(__dirname, "/dist")));
 
   // Catch-all for React Router
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "churnaapp/dist", "index.html"));
+    res.sendFile(path.join(__dirname, "/dist", "index.html"));
   });
 }
 
