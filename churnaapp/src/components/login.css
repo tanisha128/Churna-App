@@ -60,14 +60,13 @@
   color: #305724;
   font-size: 1rem;
 }
-
 @media (max-width: 600px) {
   .admin {
-    
-    padding-top: 14rem;
- margin: 1rem;
-    max-width: 100%;
+    margin: 230px auto 1rem;  /* pushes whole box down (100px ~ navbar height + gap) */
+    padding: 1.5rem;          /* normal inner padding */
+    max-width: 90%;           /* fits better on small screen */
   }
+
   .admin h2 {
     font-size: 1.5rem;
 

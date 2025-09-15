@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: calc(100vh - 80px); /* subtract navbar height */
+  padding-top: 80px; /* push content below navbar */
   background-color: #ffffff; 
   color: #333; 
   font-family: Arial, sans-serif;
@@ -11,8 +12,9 @@
 
 .order-success h1 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem; /* reduced gap */
   color: #305724; 
+   margin-top: -30px;
 }
 
 .order-success p {
@@ -20,34 +22,37 @@
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
+  margin: -10px auto 20px; /* shift upward */
 }
 
-.order-success .icon {
-  font-size: 4rem;
+.icon {
+  font-size: 6rem;
   color: #305724;
-  margin-bottom: 1rem;
-}
-@media (max-width:768px) {
-  .order-success {
-    padding: 1rem;
-    height: auto;
+  margin-bottom: 3rem;
 
+}
+
+@media (max-width:600px) {
+  .order-success {
+    margin-top: 10px;   /* just enough to clear your 80px navbar */
+    text-align: center;
   }
+
   .order-success h1 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
+    margin: 1rem 0;     /* reduce gap */
     text-align: center;
-
   }
+
   .order-success p {
     font-size: 1rem;
     max-width: 100%;
-    margin: 0.5rem 0;
-
+    margin: 0.5rem 0 1rem;  /* tighter spacing */
   }
+
   .order-success .icon {
     font-size: 3rem;
-    margin-bottom: 0.5rem;
+    margin: 1rem 0;     /* remove big padding, keep small margin */
+  }
+}
 
-}
-}
