@@ -3,22 +3,23 @@ import { useCart } from '../components/CartContext';
 import './home.css';
 import { useState } from 'react';
 import { useSearch } from './SearchContext';
-import { API_URL } from './config';
+import { API_URL} from './config';
 
 const carouselProducts = [
-  { id: 1, name: 'Its not only Medicinal use... Its also use for Healthy Health', img: 'https://static.vecteezy.com/system/resources/previews/027/688/162/non_2x/spices-and-herbs-on-top-of-wooden-table-free-photo.jpg '},
-  { id: 2, name: 'Its not only Medicinal use... Its also use for Healthy Health', img: 'https://www.healthkart.com/connect/wp-content/uploads/2022/10/900x500_thumbnail_HK-triphala-benefits.png '},
-  { id: 3, name: 'Its not only Medicinal use... Its also use for Healthy Health', img: 'https://images.onlymyhealth.com/imported/images/2023/January/27_Jan_2023/triphala-churna-benefits-main.jpg '},
-  { id: 4, name: 'Its not only Medicinal use... Its also use for Healthy Health', img: 'https://dwibhashi.co.in/cdn/shop/articles/Triphala_Churna.jpg?v=1738755886'},
+  { id:1, name:'Its not only Medicinal use... Its also use for Healthy Health', img:'https://static.vecteezy.com/system/resources/previews/027/688/162/non_2x/spices-and-herbs-on-top-of-wooden-table-free-photo.jpg'},
+  { id:2, name:'Its not only Medicinal use... Its also use for Healthy Health', img:'https://www.healthkart.com/connect/wp-content/uploads/2022/10/900x500_thumbnail_HK-triphala-benefits.png'},
+  { id:3, name:'Its not only Medicinal use... Its also use for Healthy Health', img:'https://images.onlymyhealth.com/imported/images/2023/January/27_Jan_2023/triphala-churna-benefits-main.jpg'},
+  { id:4, name:'Its not only Medicinal use... Its also use for Healthy Health', img:'https://dwibhashi.co.in/cdn/shop/articles/Triphala_Churna.jpg?v=1738755886'},
 ];
 
 const ProductCard = ({ product, addToCart }) => {
- let imageSrc = product.image_url || product.image || product.img || null;
-if (imageSrc && !imageSrc.startsWith("http")) {
-  imageSrc = `${API_URL.replace("/api", "")}${imageSrc}`;
-}
+let imageSrc = product.image_url || product.image || product.img || null;
 
-   const outOfStock = product.stock === 0;
+// For relative URLs, prepend backend base path
+if (imageSrc && !imageSrc.startsWith("http")) {
+  imageSrc = `${BASE_URL}${imageSrc.startsWith("/") ? "" : "/"}${imageSrc}`;
+}
+   const outOfStock = !product.stock || product.stock === 0;
     const [quantity, setQuantity] = useState(1); 
 
      const handleIncrement = () => {
@@ -89,7 +90,7 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const { searchResults } = useSearch();
 
- useEffect(() => {
+useEffect(() => {
   const url = `${API_URL}/products`;
   if (searchResults.length === 0) {
     fetch(url)
@@ -105,6 +106,7 @@ export default function Home() {
     setProducts(searchResults); 
   }
 }, [searchResults]);
+
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -137,12 +139,13 @@ export default function Home() {
     <h2>Its not only Medicinal use... Its also use for Healthy Health</h2>
   </div>
 
-       <div className="product">
-         <h1>Our Products</h1>
-  {(searchResults.length > 0 ? searchResults : products).map((p) => (
-    <ProductCard key={p._id} product={p} addToCart={addToCart} />
+  <div className="product">
+  <h1>Our Products</h1>
+  {products.map((p) => (
+    <ProductCard key={p._id || p.id} product={p} addToCart={addToCart} />
   ))}
 </div>
+
 
 
       {message && <div className="message">{message}</div>}

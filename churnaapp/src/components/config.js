@@ -1,6 +1,6 @@
-// src/config.js
-// config.js
-export const API_URL =
+export const BASE_URL =
   import.meta.env.MODE === "production"
-    ? ""                 // same domain in production
-    : "http://localhost:5000/api"; // local dev backend
+    ? ""
+    : "http://localhost:8000"; // match backend port
+
+export const API_URL = `${BASE_URL}/api`;
