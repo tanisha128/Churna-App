@@ -100,3 +100,23 @@
   background: #f4f4f4;      /* keep same as hover */
   color: #333;              /* prevent blue text */
 }
+/* Prevent browser dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  body, .navbar, .search-bar input, 
+  .search-results, .result-item, 
+  input, textarea, select, button {
+    background-color: #ffffff !important;  /* keep white bg */
+    color: #333 !important;               /* keep dark text */
+    border-color: #fd8124 !important;     /* keep your brand orange */
+  }
+
+  .result-item:hover {
+    background: #f4f4f4 !important;
+    color: #333 !important;
+  }
+
+  .badge {
+    background: #fd8124 !important;
+    color: #fff !important;
+  }
+}

@@ -4,6 +4,7 @@
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  background: #fff;
 }
 
 /* Hero row */
@@ -119,3 +120,27 @@
     grid-template-columns: 1fr;
   }
 }
+ @media (prefers-color-scheme: dark) {
+/* Force white background for the whole contact page */
+.contact,
+.contact-hero,
+.contact-form,
+.double-input,
+.hero-text,
+.hero-image {
+    background: #fff !important;
+    color: #305730 !important; /* optional: ensures text is visible */
+}
+
+/* Optional: buttons */
+.contact-form button {
+    background: #fd8124 !important;
+    color: #fff !important;
+}
+/* Force whole page background white */
+body, html {
+    background: #fff !important;
+    color: #305730 !important; /* optional, ensures text is visible */
+}
+
+ }

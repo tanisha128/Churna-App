@@ -64,4 +64,62 @@ footer {
   padding: 1.5rem 1rem;
   margin-top: auto; /* ensures footer stays at bottom */
 }
+@media (prefers-color-scheme: dark) {
+  /* General background + text */
+  body,
+  .navbar,
+  .product,
+  .product-card,
+  .benefit-card,
+  .search-bar input,
+  .search-results,
+  input,
+  textarea,
+  select,
+  button,
+  .quantity-selector,
+  .quantity-selector input,
+  .quantity-selector button {
+    background-color: #ffffff !important; /* keep white backgrounds */
+    color: #333 !important;               /* keep dark text */
+    border-color: #fd8124 !important;     /* keep brand orange */
+  }
 
+  /* Headings / price text */
+  h1, h2, h3, h4, h5, h6,
+  .product-card h3,
+  .price,
+  .benefit-card h3 {
+    color: #305724 !important; /* keep your green heading color */
+  }
+
+  /* Buttons */
+  .add-btn,
+  .badge {
+    background: #fd8124 !important;
+    color: #fff !important;
+  }
+
+  .add-btn:hover {
+    background: #e6904f !important;
+  }
+
+  /* Search results text */
+  .result-item {
+    color: #333 !important;
+  }
+
+  .result-item:hover {
+    background: #f4f4f4 !important;
+    color: #333 !important;
+  }
+
+  /* Placeholders */
+  input::placeholder,
+  textarea::placeholder {
+    color: #888 !important;
+  }
+}
+:root {
+  color-scheme: light;
+}

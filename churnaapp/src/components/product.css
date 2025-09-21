@@ -61,4 +61,44 @@
   margin-top: 10px; /* Reduced margin-top */
   justify-content: center;
 }
+@media (prefers-color-scheme: dark) {
+  /* Product grid + cards */
+  .product {
+    background: #ffffff !important;
+  }
+
+  .product-card {
+    background: #ffffff !important;
+    color: #305724 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .product-card h3,
+  .price {
+    color: #305724 !important; /* keep your green text */
+  }
+
+  /* Add to cart button */
+  .add-btn {
+    background: #fd8124 !important;
+    color: #fff !important;
+  }
+
+  .add-btn:hover {
+    background: #e6904f !important;
+  }
+
+  /* Quantity selector */
+  .quantity-selector {
+    background: #ffffff !important;
+    color: #333 !important;
+  }
+
+  .quantity-selector button,
+  .quantity-selector input {
+    background: #ffffff !important;
+    color: #333 !important;
+    border: 1px solid lightgrey !important;
+  }
+}
 

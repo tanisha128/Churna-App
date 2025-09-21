@@ -91,6 +91,9 @@ body {
   font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
-
-
-
+@media (prefers-color-scheme: dark) {
+  .add-button {
+    background: #fd8124 !important;
+    color: #fff !important;
+  }
+}

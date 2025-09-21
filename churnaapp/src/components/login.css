@@ -86,3 +86,9 @@
 }
 
 }
+@media (prefers-color-scheme: dark) {
+  .admin button {
+    background: #fd8124 !important;
+    color: #fff !important;
+  }
+}
