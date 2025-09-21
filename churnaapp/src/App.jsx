@@ -16,6 +16,7 @@ import { SearchProvider } from './components/SearchContext';
 import ProductDetail from './components/ProductDetails';
 import AdminOrder from './components/adminOrder';
 
+
 function App() {
   return (
     <CartProvider>

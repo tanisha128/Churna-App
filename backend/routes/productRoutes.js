@@ -92,6 +92,18 @@ router.get('/:id', async (req, res) => {
   }
 });    
 
+//To add benefits to products 
+router.post('/:id', async (req, res) => {
+  try {
+    // Ensure benefits is a JSON string
+    req.body.benefits = JSON.stringify(req.body.benefits);
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
 
 // navabr search product
 router.get("/", async (req, res) => {

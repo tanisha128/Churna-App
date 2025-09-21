@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../components/CartContext';
 import './home.css';
+import './product.css'
 import { useState } from 'react';
 import { useSearch } from './SearchContext';
 import { API_URL} from './config';
@@ -55,8 +57,9 @@ if (imageSrc && !imageSrc.startsWith("http")) {
           Out of Stock
         </span>
       )}
-
+       <Link to={`/product/${product._id}`}>
       <h3>{product.name}</h3>
+      </Link>
       <p className="description">{product.description}</p> 
       <p className='price'>₹{product.price}</p>
       {/* Quantity Selector */}

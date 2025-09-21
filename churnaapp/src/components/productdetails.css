@@ -1,100 +1,96 @@
-.product-detail {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.25s;
-    margin-top: 130px; /* Adjust this value to match your navbar height */
+body {
+  font-family: 'Noto Sans Devanagari', sans-serif;
 }
 
-.detail-info:hover {
-transform: translateY(-4px);
+
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-top: 130px;
+  align-items: start; /* align content at top */
 }
+
 .product-detail img {
-width: 100%;
-height: 180px;
-object-fit: cover;
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
 }
+
+.detail-info {
+  text-align: center;
+}
+
 .detail-info h2 {
-font-size: 1.1rem;
-margin: 0.8rem 0 0.4rem;
-color: #305724;
+  font-size: 1.2rem;
+  margin: 0.8rem 0 0.4rem;
+  color: #305724;
 }
+
 .price, .description {
-font-weight: 700;
-font-size: 1.1rem;
-margin-bottom: 0.8rem;
-color: #305724;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: #305724;
 }
-.add-btn {
-width: 90%;
-margin-bottom: 1rem;
-padding: 0.6rem;
-border: none;
-border-radius: 20px;
-background: #fd8124;
-color: #fff;
-font-weight: 600;
-cursor: pointer;
-transition: background 0.25s;
+
+.add-button {
+  width: 50%;
+  margin-top: 1rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 20px;
+  background: #fd8124;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
 }
 .add-btn:hover {
-background: #e6904f;
+  background: #e6904f;
 }
 
-.product-detail {
-  padding-bottom: 4rem; /* keeps footer from overlapping product content */
+/* Benefits section aligned to right column */
+.benefits {
+  text-align: left;
+}
+.benefits h3 {
+  margin-bottom: 0.6rem;
+  color: #305724;
+}
+.benefits ul {
+  padding-left: 1.2rem;
+}
+.benefits li {
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
 }
 
-@media (max-width: 768px ) {
-    .product-detail {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-        gap: 1rem;
-        padding-bottom: 20rem; /* <-- Add this line */
-        margin-top: 200px;
-    }
-    .product-detail img {
-        height: 150px;
-        object-fit:contain;
-
-    }
-    .detail-info h2 {
-        font-size: 1rem;
-        margin: 0.5rem 0 0.3rem;
-        color: #305724;
-
-    }
-    .price, .description {
-        font-weight: 700;
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-        color: #305724;
-
-    }
-    .add-btn {
-        width: 100%;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
-        border: none;
-        border-radius: 20px;
-        background: #fd8124;
-        columns: #fff;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.25s;
-
-        
-    }
-    .add-btn:hover {
-        background: #e6904f;
-    }
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+    margin-top: 200px;
+  }
+  .product-detail img {
+    height: 180px;
+  }
 }
+
+.benefits p {
+  white-space: pre-line;
+  word-break: break-word;
+  line-break: anywhere;
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
 
 
 
