@@ -70,7 +70,7 @@ const handleSubmit = async (e) => {
   <strong>Call us</strong>
   <br />
 
-  <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+  <span className="number" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
     +91-9822972555
     <a
       href="https://wa.me/919822972555"
@@ -96,7 +96,7 @@ const handleSubmit = async (e) => {
   </span>
  <br />
 
-  <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+  <span className='number' style={{ display: "flex", alignItems: "center", gap: "8px" }}>
     +91-9156033505
     <a
       href="https://wa.me/919156033505"

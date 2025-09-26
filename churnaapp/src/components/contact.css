@@ -119,6 +119,11 @@
   .double-input {
     grid-template-columns: 1fr;
   }
+   .number {
+    justify-content: center; /* Center the number + icon horizontally */
+    text-align: center; /* Optional: Center-aligns text inside the span */
+    width: 100%; /* Take full width to allow centering */
+  }
 }
  @media (prefers-color-scheme: dark) {
 /* Force white background for the whole contact page */
