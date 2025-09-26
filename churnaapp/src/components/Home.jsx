@@ -14,7 +14,7 @@ const carouselProducts = [
   { id:4, name:'Its not only Medicinal use... Its also use for Healthy Health', img:'https://dwibhashi.co.in/cdn/shop/articles/Triphala_Churna.jpg?v=1738755886'},
 ];
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product }) => {
 let imageSrc = product.image_url || product.image || product.img || null;
 
 // For relative URLs, prepend backend base path
@@ -22,19 +22,7 @@ if (imageSrc && !imageSrc.startsWith("http")) {
   imageSrc = `${BASE_URL}${imageSrc.startsWith("/") ? "" : "/"}${imageSrc}`;
 }
    const outOfStock = !product.stock || product.stock === 0;
-    const [quantity, setQuantity] = useState(1); 
-
-     const handleIncrement = () => {
-    if (quantity < product.stock) {
-      setQuantity(quantity + 1);
-    }
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+   
 
   return (
     <div className='product-card'>
@@ -62,25 +50,9 @@ if (imageSrc && !imageSrc.startsWith("http")) {
       </Link>
       <p className="description">{product.description}</p> 
       <p className='price'>₹{product.price}</p>
-      {/* Quantity Selector */}
-      <div className="quantity-selector">
-        <button onClick={handleDecrement} className="quantity-btn" disabled={quantity <= 1}>
-          -
-        </button>
-        <span className="quantity-value">{quantity}</span>
-        <button onClick={handleIncrement} className="quantity-btn" disabled={quantity >= product.stock}>
-          +
-        </button>
-      </div>
-
-      
-       <button
-          onClick={() => addToCart({ ...product, qty: quantity })}
-        className="add-btn"
-        disabled={outOfStock}
-      >
-        {outOfStock ? "Unavailable" : "Add to Cart"}
-      </button>
+      <Link to ={`/product/${product._id}`}>
+      <button className='add-btn'>View benefits</button>
+      </Link>
     </div>
   );
 };

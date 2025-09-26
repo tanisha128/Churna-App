@@ -66,37 +66,74 @@ const handleSubmit = async (e) => {
             Feel free to reach out to us with any questions, feedback, or concerns.
           </p>
           <ul className="contact-list">
-            <li>
-              <strong>Call us</strong>
-              <br />
-              <span>+91-9850604467</span>
-              <br />
-              <span>+91-6789896434</span>
-            </li>
+           <li>
+  <strong>Call us</strong>
+  <br />
+
+  <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    +91-9822972555
+    <a
+      href="https://wa.me/919822972555"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "28px",
+        height: "28px",
+        borderRadius: "50%",
+        backgroundColor: "#25D366", // WhatsApp green
+      }}
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+        width="18"
+        height="18"
+      />
+    </a>
+  </span>
+ <br />
+
+  <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+    +91-9156033505
+    <a
+      href="https://wa.me/919156033505"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "28px",
+        height: "28px",
+        borderRadius: "50%",
+        backgroundColor: "#25D366",
+      }}
+    >
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+        width="18"
+        height="18"
+      />
+    </a>
+  </span>
+</li>
+
             <li>
               <strong>Email us</strong>
               <br />
-              <span>support@ayurveda.com</span>
-              <br />
-              <span>contact@ayurveda.com</span>
+              <span>ashamohanpune@gmail.com</span>
+             
             </li>
             <li>
               <strong>Visit us</strong>
               <br />
-              Shop no.3 akshay complex, warje highway, pune, maharshtra,411058
+              Ashamohan enterprises, 343 shaniwar peth, city icon building , near english medium school, Pune-30
               <br />
-              <div className="map-wrapper">
-                <iframe
-                  title="Google Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215676!2d-74.0060!3d40.7128!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ2LjAiTiA3NMKwMDAnMjEuNiJX!5e0!3m2!1sen!2sus!4v1650000000000"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0, borderRadius: 12 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
+              <div className="map-wrapper"> <iframe title="Google Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.8276617819954!2d73.84614731535197!3d18.5178055874045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c07d7f2a2f5f%3A0x8a62f2f0370f4953!2s18%C2%B031'04.1%22N%2073%C2%B050'55.4%22E!5e0!3m2!1sen!2sin!4v1727354789000!5m2!1sen!2sin" width="100%" height="300" style={{ border: 0, borderRadius: 12 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" ></iframe> </div>
             </li>
           </ul>
         </div>

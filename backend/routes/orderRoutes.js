@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Order = require("../model/order.js");   // ✅ use one consistent path (models with capital O)
+const Order = require("../model/order.js");   
 const Product = require("../model/product.js");
 const sendMail = require("../utils/email.js"); 
 
@@ -53,7 +53,7 @@ ${lines}
     await sendMail({
       to: customer.email,
       subject: `✅ Your Order Confirmation (#${order._id})`,
-      text: `Hello ${customer.name},\n\nThank you for your order!\n\n${orderText}\n\nWe will deliver your order soon.\n\n– Ayurveda Shop`,
+      text: `Hello ${customer.name},\n\nThank you for your order!\n\n${orderText}\n\nWe will deliver your order soon.\n\n– Oxyjain Herbal Care`,
     });
 
     res.status(201).json(order);
