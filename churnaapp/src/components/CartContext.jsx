@@ -1,49 +1,56 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from "react";
 
 const CartContext = createContext();
 
 const initialState = {
   cartItems: [],
   cartCount: 0,
-  message: '',
+  message: "",
 };
 
 function cartReducer(state, action) {
   switch (action.type) {
-   case "ADD_TO_CART": {
-  const existing = state.cartItems.find(item => item.id === action.payload.id);
+    case "ADD_TO_CART": {
+      const productId = action.payload._id || action.payload.id; // ✅ handle both
 
-  let updatedCart;
-  if (existing) {
-    // Item already exists → increase qty
-    updatedCart = state.cartItems.map(item =>
-      item.id === action.payload.id
-        ? { ...item, qty: item.qty + (action.payload.qty || 1) }
-        : item
-    );
-  } else {
-    // New item → add with qty
-    updatedCart = [...state.cartItems, { ...action.payload, qty: action.payload.qty || 1 }];
-  }
-
-  return {
-    ...state,
-    cartItems: updatedCart,
-    cartCount: updatedCart.reduce((sum, item) => sum + item.qty, 0),
-    message: "Item added to cart successfully!",
-  };
-}
-
-
-
-    case "REMOVE_FROM_CART": {
-      const updatedCart = state.cartItems.filter(
-        (item) => item.id !== action.payload && item._id !== action.payload
+      const existing = state.cartItems.find(
+        (item) => item._id === productId || item.id === productId
       );
+
+      let updatedCart;
+      if (existing) {
+        // ✅ Item already exists → increase qty
+        updatedCart = state.cartItems.map((item) =>
+          item._id === productId || item.id === productId
+            ? { ...item, qty: item.qty + (action.payload.qty || 1) }
+            : item
+        );
+      } else {
+        // ✅ New item → add with qty
+        updatedCart = [
+          ...state.cartItems,
+          { ...action.payload, qty: action.payload.qty || 1 },
+        ];
+      }
+
       return {
         ...state,
         cartItems: updatedCart,
-        cartCount: updatedCart.reduce((sum, item) => sum + item.qty, 0), // ✅ same logic here
+        cartCount: updatedCart.reduce((sum, item) => sum + item.qty, 0),
+        message: "Item added to cart successfully!",
+      };
+    }
+
+    case "REMOVE_FROM_CART": {
+      const productId = action.payload;
+      const updatedCart = state.cartItems.filter(
+        (item) => item._id !== productId && item.id !== productId
+      );
+
+      return {
+        ...state,
+        cartItems: updatedCart,
+        cartCount: updatedCart.reduce((sum, item) => sum + item.qty, 0),
         message: "",
       };
     }
@@ -61,24 +68,23 @@ function cartReducer(state, action) {
   }
 }
 
-
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addToCart = (item) => {
-    dispatch({ type: 'ADD_TO_CART', payload: item });
+    dispatch({ type: "ADD_TO_CART", payload: item });
   };
 
   const removeFromCart = (id) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+    dispatch({ type: "REMOVE_FROM_CART", payload: id });
   };
 
   const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
+    dispatch({ type: "CLEAR_CART" });
   };
 
   const clearMessage = () => {
-    dispatch({ type: 'CLEAR_MESSAGE' });
+    dispatch({ type: "CLEAR_MESSAGE" });
   };
 
   return (
@@ -87,7 +93,7 @@ export const CartProvider = ({ children }) => {
         ...state,
         addToCart,
         removeFromCart,
-        clearCart,       
+        clearCart,
         clearMessage,
       }}
     >
@@ -99,7 +105,7 @@ export const CartProvider = ({ children }) => {
 export function useCart() {
   const context = useContext(CartContext);
   if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 }

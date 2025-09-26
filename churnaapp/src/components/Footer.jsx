@@ -6,8 +6,8 @@ export default function Footer() {
     <footer className="footer">
     <div className='footer-top'>
         <div className='footer-col'>
-            <h4>Churna App</h4>
-            <p>Authentic Ayurveda, delivered to your doorstep.</p>
+          
+            <p>Authentic Ayurvedic Products, delivered to your doorstep.</p>
         </div>
         <div className='footer-col'>
             <h4>Quick Links</h4>
@@ -19,8 +19,8 @@ export default function Footer() {
         </div>
         <div className="footer-col">
           <h4>Contact Us</h4>
-          <p>Call&nbsp;:&nbsp;<a href="tel:+919929561904">+91 99295 61904</a></p>
-           <p>Email&nbsp;:&nbsp;<a href="mailto:support@churna.com">support@churna.com</a></p>
+          <p>Call&nbsp;:&nbsp;<a href="tel:+919822972555">+91 9822972555</a></p>
+           <p>Email&nbsp;:&nbsp;<a href="mailto:ashamohanpune@gmail.com">ashamohanpune@gmail.com</a></p>
         </div>
         <div className='footer-col'>
             <h4>Follow Us</h4>

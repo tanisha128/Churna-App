@@ -15,73 +15,62 @@ const carouselProducts = [
 ];
 
 const ProductCard = ({ product }) => {
-let imageSrc = product.image_url || product.image || product.img || null;
+  let imageSrc = product.image_url || product.image || product.img || null;
 
-// For relative URLs, prepend backend base path
-if (imageSrc && !imageSrc.startsWith("http")) {
-  imageSrc = `${BASE_URL}${imageSrc.startsWith("/") ? "" : "/"}${imageSrc}`;
-}
-   const outOfStock = !product.stock || product.stock === 0;
-   
+  // For relative URLs, prepend backend base path
+  if (imageSrc && !imageSrc.startsWith("http")) {
+    imageSrc = `${BASE_URL}${imageSrc.startsWith("/") ? "" : "/"}${imageSrc}`;
+  }
 
   return (
-    <div className='product-card'>
+    <div className="product-card">
       {imageSrc ? (
-  <img
-    src={imageSrc}
-    alt={product.name}
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.src = "/default.png";
-    }}
-  />
-) : (
-  <img src="/default.png" alt="default product" />
-)}
-
- 
-      {outOfStock && (
-        <span className="out-of-stock-badge">
-          Out of Stock
-        </span>
+        <img
+          src={imageSrc}
+          alt={product.name}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "/default.png";
+          }}
+        />
+      ) : (
+        <img src="/default.png" alt="default product" />
       )}
-       <Link to={`/product/${product._id}`}>
-      <h3>{product.name}</h3>
+
+      <Link to={`/product/${product._id}`}>
+        <h3>{product.name}</h3>
       </Link>
-      <p className="description">{product.description}</p> 
-      <p className='price'>₹{product.price}</p>
-      <Link to ={`/product/${product._id}`}>
-      <button className='add-btn'>View benefits</button>
+      <p className="description">{product.description}</p>
+      <p className="price">₹{product.price}</p>
+
+      <Link to={`/product/${product._id}`}>
+        <button className="add-btn">View Benefits</button>
       </Link>
     </div>
   );
 };
 
-
-
 export default function Home() {
-  const { addToCart, message, clearMessage } = useCart();
   const [index, setIndex] = useState(0);
   const [products, setProducts] = useState([]);
   const { searchResults } = useSearch();
 
-useEffect(() => {
-  const url = `${API_URL}/products`;
-  if (searchResults.length === 0) {
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Fetch error:", err));
-  } else {
-    setProducts(searchResults); 
-  }
-}, [searchResults]);
-
+  useEffect(() => {
+    const url = `${API_URL}/products`;
+    if (searchResults.length === 0) {
+      fetch(url)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => setProducts(data))
+        .catch((err) => console.error("Fetch error:", err));
+    } else {
+      setProducts(searchResults);
+    }
+  }, [searchResults]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -90,40 +79,29 @@ useEffect(() => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        clearMessage();
-      }, 3000); // Clear the message after 3 seconds
-      return () => clearTimeout(timer);
-    }
-  }, [message, clearMessage]);
-
   return (
-    <div className='hero'>
-  <div className='hero-section'>
-    {carouselProducts.map((c, i) => (
-      <div key={c.id} className={`hero-slide ${i === index ? 'active' : ''}`}>
-        <img src={c.img} alt={c.name} />
+    <div className="hero">
+      <div className="hero-section">
+        {carouselProducts.map((c, i) => (
+          <div
+            key={c.id}
+            className={`hero-slide ${i === index ? "active" : ""}`}
+          >
+            <img src={c.img} alt={c.name} />
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
 
-  
-  <div className='hero-caption-below'>
-    <h2>Its not only Medicinal use... Its also use for Healthy Health</h2>
-  </div>
+      <div className="hero-caption-below">
+        <h2>Its not only Medicinal use... Its also use for Healthy Health</h2>
+      </div>
 
-  <div className="product">
-  <h1>Our Products</h1>
-  {products.map((p) => (
-    <ProductCard key={p._id || p.id} product={p} addToCart={addToCart} />
-  ))}
-</div>
-
-
-
-      {message && <div className="message">{message}</div>}
+      <div className="product">
+        <h1>Our Products</h1>
+        {products.map((p) => (
+          <ProductCard key={p._id || p.id} product={p} />
+        ))}
+      </div>
     </div>
   );
 }

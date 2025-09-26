@@ -6,13 +6,14 @@ import "./productdetails.css";
 import { API_URL } from "./config";
 
 export default function ProductDetail() {
-  const { id, productId } = useParams(); // supports both param names
+  const { id, productId } = useParams();
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [quantity, setQuantity] = useState(1); // NEW state for quantity
+  const [quantity, setQuantity] = useState(1);
+  const [message, setMessage] = useState(""); // ✅ message state
 
-  const pid = productId || id; // fallback if one is missing
+  const pid = productId || id;
 
   useEffect(() => {
     if (!pid) return;
@@ -31,7 +32,6 @@ export default function ProductDetail() {
   if (loading) return <p>Loading...</p>;
   if (!product) return <p>Product not found</p>;
 
-  // Handle image
   let imageSrc = product.image_url || product.image;
   if (imageSrc && !imageSrc.startsWith("http")) {
     imageSrc = `${imageSrc}`;
@@ -48,7 +48,6 @@ export default function ProductDetail() {
       .replace(/\uFEFF/g, "");
   }
 
-  // Normalize benefits
   const cleanBenefits = product.benefits
     ? product.benefits
         .replace(/\r\n/g, "\n")
@@ -69,6 +68,12 @@ export default function ProductDetail() {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
+  };
+
+  const handleAddToCart = () => {
+    addToCart({ ...product, qty: quantity });
+    setMessage("✅ Item added to cart successfully!"); // show success message
+    setTimeout(() => setMessage(""), 3000); // auto-hide after 3s
   };
 
   return (
@@ -102,12 +107,15 @@ export default function ProductDetail() {
           </div>
 
           <button
-            onClick={() => addToCart({ ...product, qty: quantity })}
+            onClick={handleAddToCart}
             className="add-button"
             disabled={outOfStock}
           >
             {outOfStock ? "Unavailable" : "Add to Cart"}
           </button>
+
+          {/* ✅ Success message */}
+          {message && <p className="success-message">{message}</p>}
         </div>
       </div>
 
