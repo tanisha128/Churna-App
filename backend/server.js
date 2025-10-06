@@ -22,6 +22,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/pictures", express.static(path.join(__dirname, "pictures")));
 
+app.use(
+  cors({
+    origin: ["https://oxyjainherbalcare.vercel.app/"], // your Vercel frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 // ================= API ROUTES =================
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
