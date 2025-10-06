@@ -21,6 +21,14 @@
   display: block;
 }
 
+.Logo {
+  display: flex;
+  align-items: center;
+}
+.Logo img + img {
+  margin-left: 20px; 
+}
+
 
 .search-bar {
   flex: 1;
@@ -119,4 +127,17 @@
     background: #fd8124 !important;
     color: #fff !important;
   }
+}
+
+@media (max-width: 600px) {
+  .search-bar {
+    max-width: 350px;
+  }
+.Logo img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+
+}
 }

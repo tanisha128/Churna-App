@@ -5,7 +5,8 @@ import './secondaryNav.css';
 const categories = [
   'Seeds',
   'Powders',
-  'Oils'
+  'Oils',
+  'Honey'
 ];
 
 export default function SecondaryNav() {

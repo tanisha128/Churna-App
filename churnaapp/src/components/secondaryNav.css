@@ -66,3 +66,11 @@
 .dropdown-menu li a:hover {
   background: #f0c883;
 }
+
+@media (max-width: 600px) {
+  .secondary-navbar {
+   position: fixed;
+   top: 68px;
+} 
+}
+  

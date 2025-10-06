@@ -34,7 +34,9 @@ export default function Navbar() {
   return (
     <div className='navbar'>
       <div className='Logo'>
-        <img src='/logo.png' alt='logo' />
+        <img src='/logoo.png' alt='logo' />
+         <img src='/logo2.png' alt='logo2' />
+        
       </div>
 
       <div className='search-bar'>
