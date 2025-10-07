@@ -1,4 +1,4 @@
-// api/server.js
+
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -92,24 +92,18 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ DB connection error:", err));
 
-// ===== CREATE DEFAULT ADMIN =====
 async function createDefaultAdmin() {
   try {
     const email = process.env.ADMIN_EMAIL;
     const password = process.env.ADMIN_PASSWORD;
 
-    if (!email || !password) {
-      console.warn("⚠️ ADMIN_EMAIL or ADMIN_PASSWORD not set in .env");
-      return;
-    }
+    if (!email || !password) return;
 
     const existing = await User.findOne({ email });
     if (!existing) {
       const hashedPassword = await bcrypt.hash(password, 10);
       await User.create({ email, password: hashedPassword, role: "admin" });
       console.log(`✅ Admin created: ${email}`);
-    } else {
-      console.log("ℹ️ Admin already exists");
     }
   } catch (err) {
     console.error("Error creating admin:", err);
@@ -117,5 +111,5 @@ async function createDefaultAdmin() {
 }
 createDefaultAdmin();
 
-// ===== Export for Vercel =====
-export const handler = serverless(app);
+// ✅ export the app instead of serverless(app)
+export default app;
