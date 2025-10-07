@@ -2,35 +2,31 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-dotenv.config();
-const productRoutes = require("../routes/productRoutes");
-const authRoutes = require("../routes/authRoutes");
-const orderRoutes = require("../routes/orderRoutes");
-const bcrypt = require("bcryptjs");
-const User = require("../model/user");
 const path = require("path");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcryptjs");
 const serverless = require("serverless-http");
 
+// Routes and Models
+const productRoutes = require("../routes/productRoutes");
+const authRoutes = require("../routes/authRoutes");
+const orderRoutes = require("../routes/orderRoutes");
+const User = require("../model/user");
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["https://oxyjainherbalcare.vercel.app"], // your frontend URL
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
 app.use(express.json());
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/pictures", express.static(path.join(__dirname, "pictures")));
-
-app.use(
-  cors({
-    origin: ["https://oxyjainherbalcare.vercel.app"], // your Vercel frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
 
 // ================= API ROUTES =================
 app.use("/api/products", productRoutes);
@@ -38,11 +34,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 
 app.get("/api", (req, res) => {
-  res.send("Backend running on Vercel ✅");
+  res.send("✅ Backend running on Vercel");
 });
 
+// ================= CONTACT FORM =================
 app.post("/api/contact", (req, res) => {
   const { firstName, lastName, email, phoneNumber, subject, message } = req.body;
+
   if (!firstName || !email || !phoneNumber || !subject || !message) {
     return res.status(400).json({ error: "All fields are required" });
   }
@@ -81,13 +79,14 @@ app.post("/api/contact", (req, res) => {
 });
 
 // ================= DATABASE CONNECTION =================
-// ===== DATABASE CONNECTION =====
 mongoose
   .connect(process.env.URL)
-  .then(() => console.log("✅ MongoDB connected"))
+  .then(() => {
+    console.log("✅ MongoDB connected");
+    createDefaultAdmin();
+  })
   .catch((err) => console.error("❌ DB connection error:", err));
 
-  
 // ================= CREATE DEFAULT ADMIN =================
 async function createDefaultAdmin() {
   try {
@@ -112,6 +111,7 @@ async function createDefaultAdmin() {
   }
 }
 
+// Export handler for Vercel
 module.exports = app;
 module.exports.handler = serverless(app);
 
