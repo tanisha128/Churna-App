@@ -1,21 +1,29 @@
-const mongoose = require("mongoose");
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
+// api/server.js
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import bodyParser from "body-parser";
+import nodemailer from "nodemailer";
+import bcrypt from "bcryptjs";
+import serverless from "serverless-http";
+import { fileURLToPath } from "url";
+
+import productRoutes from "../routes/productRoutes.js";
+import authRoutes from "../routes/authRoutes.js";
+import orderRoutes from "../routes/orderRoutes.js";
+import User from "../model/user.js";
+
 dotenv.config();
-const productRoutes = require("./routes/productRoutes");
-const authRoutes = require("./routes/authRoutes");
-const orderRoutes = require("./routes/orderRoutes");
-const bcrypt = require("bcryptjs");
-const User = require("./model/user");
-const path = require("path");
-const bodyParser = require("body-parser");
-const nodemailer = require("nodemailer");
+
+// Vercel doesn't have __dirname, so we define it:
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 8000;
 
-// Middleware
+// ===== Middleware =====
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -24,77 +32,67 @@ app.use("/pictures", express.static(path.join(__dirname, "pictures")));
 
 app.use(
   cors({
-    origin: ["https://oxyjainherbalcare.vercel.app/"], // your Vercel frontend URL
+    origin: ["https://oxyjainherbalcare.vercel.app"], // your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
-// ================= API ROUTES =================
+// ===== API ROUTES =====
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 
-app.post("/api/contact", (req, res) => {
-  const { firstName, lastName, email, phoneNumber, subject, message } = req.body;
-  if (!firstName || !email || !phoneNumber || !subject || !message) {
-    return res.status(400).json({ error: "All fields are required" });
-  }
-
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-
-  const mailOptions = {
-    from: email,
-    to: process.env.EMAIL_USER,
-    subject: `Contact Form Submission: ${subject}`,
-    text: `
-      First Name: ${firstName}
-      Last Name: ${lastName || "Not provided"}
-      Email: ${email}
-      Phone Number: ${phoneNumber}
-      Subject: ${subject}
-      Message: ${message}
-    `,
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending email:", error);
-      res.status(500).json({ error: "Error sending email" });
-    } else {
-      console.log("Email sent: " + info.response);
-      res.status(200).json({ message: "Email sent successfully" });
-    }
-  });
+app.get("/api", (req, res) => {
+  res.send("Backend running on Vercel ✅");
 });
 
-// ================= SERVE FRONTEND =================
-if (process.env.NODE_ENV === "production") {
-  // Serve the React build folder
-  app.use(express.static(path.join(__dirname, "/dist")));
+// ===== CONTACT FORM EMAIL =====
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { firstName, lastName, email, phoneNumber, subject, message } = req.body;
 
-  // Catch-all for React Router
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/dist", "index.html"));
-  });
-}
+    if (!firstName || !email || !phoneNumber || !subject || !message) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
 
-// ================= DATABASE CONNECTION =================
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: email,
+      to: process.env.EMAIL_USER,
+      subject: `Contact Form Submission: ${subject}`,
+      text: `
+        First Name: ${firstName}
+        Last Name: ${lastName || "Not provided"}
+        Email: ${email}
+        Phone Number: ${phoneNumber}
+        Subject: ${subject}
+        Message: ${message}
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (err) {
+    console.error("Error sending email:", err);
+    res.status(500).json({ error: "Error sending email" });
+  }
+});
+
+// ===== DATABASE CONNECTION =====
 mongoose
   .connect(process.env.URL)
-  .then(() => {
-    console.log("Database connected");
-    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
-  })
-  .catch((err) => console.error("DB connection error:", err));
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ DB connection error:", err));
 
-// ================= CREATE DEFAULT ADMIN =================
+// ===== CREATE DEFAULT ADMIN =====
 async function createDefaultAdmin() {
   try {
     const email = process.env.ADMIN_EMAIL;
@@ -117,9 +115,7 @@ async function createDefaultAdmin() {
     console.error("Error creating admin:", err);
   }
 }
-
 createDefaultAdmin();
 
-
-
-
+// ===== Export for Vercel =====
+export const handler = serverless(app);
