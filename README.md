@@ -11,12 +11,12 @@ Supports product browsing, cart, order placement, authentication, and contact fo
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the Repository
+### 1️ Clone the Repository
 ```bash
 git clone https://github.com/tanisha128/Churna-App.git
 cd churnaapp
 
-2️⃣ Setup Backend
+2️ Setup Backend
 cd backend
 npm install
 
@@ -32,14 +32,14 @@ ADMIN_PASSWORD=yourpassword
 Start backend:
 npm run dev
 
-3️⃣ Setup Frontend
+3 Setup Frontend
 cd ../churnaapp
 npm install
 npm start
 
 cd churnaapp
 
-2️⃣ Setup Backend
+4 Setup Backend
 cd backend
 npm install
 
@@ -55,7 +55,7 @@ ADMIN_PASSWORD=yourpassword
 Start backend:
 npm run dev
 
-3️⃣ Setup Frontend
+5 Setup Frontend
 cd ../churnaapp
 npm install
 npm start
