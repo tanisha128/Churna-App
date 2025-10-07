@@ -39,7 +39,7 @@ export default function SecondaryNav() {
         <button
           className="nav-link category-btn"
           onClick={toggle('cat')}>
-          SHOP BY CATEGORY ▾
+          SEARCH BY CATEGORY ▾
         </button>
         {open === 'cat' && (
           <ul className="dropdown-menu" onClick={(e) => e.stopPropagation()}>
