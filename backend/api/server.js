@@ -8,7 +8,6 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 const serverless = require("serverless-http");
 
-// Routes and Models
 const productRoutes = require("../routes/productRoutes");
 const authRoutes = require("../routes/authRoutes");
 const orderRoutes = require("../routes/orderRoutes");
@@ -18,13 +17,13 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(
   cors({
     origin: [
+      "http://localhost:5173", // ✅ allow React local frontend
       "https://oxyjainherbalcare.in",
       "https://www.oxyjainherbalcare.in",
-      "https://oxyjainherbalcare.vercel.app" // optional, for older deploys
+      "https://oxyjainherbalcare.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -35,13 +34,12 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/pictures", express.static(path.join(__dirname, "pictures")));
 
-// ================= API ROUTES =================
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 
 app.get("/api", (req, res) => {
-  res.send("✅ Backend running on Vercel");
+  res.send("✅ Backend running locally or on Vercel");
 });
 
 // ================= CONTACT FORM =================
@@ -85,7 +83,6 @@ app.post("/api/contact", (req, res) => {
   });
 });
 
-// ================= DATABASE CONNECTION =================
 mongoose
   .connect(process.env.URL)
   .then(() => {
@@ -94,7 +91,6 @@ mongoose
   })
   .catch((err) => console.error("❌ DB connection error:", err));
 
-// ================= CREATE DEFAULT ADMIN =================
 async function createDefaultAdmin() {
   try {
     const email = process.env.ADMIN_EMAIL;
@@ -118,7 +114,13 @@ async function createDefaultAdmin() {
   }
 }
 
-// Export handler for Vercel
+// ✅ Local development: start Express normally
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 8000;
+  app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+}
+
+// ✅ Vercel: export for serverless
 module.exports = app;
 module.exports.handler = serverless(app);
 

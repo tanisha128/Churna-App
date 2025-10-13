@@ -11,7 +11,7 @@ export default function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [message, setMessage] = useState(""); // ✅ message state
+  const [message, setMessage] = useState(""); 
 
   const pid = productId || id;
 

@@ -20,47 +20,61 @@ export default function Order() {
 
   const navigate = useNavigate();
 
-  const placeOrder = async () => {
-    if (!customerName || !customerEmail || !address || !phone) {
-      alert("Please fill out all required fields.");
-      return;
-    }
+ const placeOrder = async () => {
+  if (!customerName || !customerEmail || !address || !phone) {
+    alert("Please fill out all required fields.");
+    return;
+  }
 
-    setIsSubmitting(true);
+  // ✅ Email validation using regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(customerEmail)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
 
-    const orderData = {
-      customer: {
-        name: customerName,
-        email: customerEmail,
-        address,
-        phone,
-      },
-      items: cartItems.map((it) => {
-        const cleanPrice = Number(it.price?.toString().replace("₹", "")) || 0;
-        const cleanQty = Number(it.qty) || 1;
+  // ✅ Phone validation: only 10 digits allowed
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(phone)) {
+    alert("Please enter a valid 10-digit phone number.");
+    return;
+  }
 
-        return {
-          product: it._id || it.id, 
-          name: it.name,
-          price: cleanPrice,
-          image_url: it.image,
-          qty: cleanQty,
-        };
-      }),
-      total: totalAmount,
-    };
+  setIsSubmitting(true);
 
-    try {
-      const response = await API.orders.create(orderData);
-      clearCart(); // ✅ empty cart after success
-      navigate("/ordersuccess");
-    } catch (error) {
-      console.error("Error placing order:", error);
-      alert("Failed to place order. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const orderData = {
+    customer: {
+      name: customerName,
+      email: customerEmail,
+      address,
+      phone,
+    },
+    items: cartItems.map((it) => {
+      const cleanPrice = Number(it.price?.toString().replace("₹", "")) || 0;
+      const cleanQty = Number(it.qty) || 1;
+
+      return {
+        product: it._id || it.id,
+        name: it.name,
+        price: cleanPrice,
+        image_url: it.image,
+        qty: cleanQty,
+      };
+    }),
+    total: totalAmount,
   };
+
+  try {
+    const response = await API.orders.create(orderData);
+    clearCart();
+    navigate("/ordersuccess");
+  } catch (error) {
+    console.error("Error placing order:", error);
+    alert("Failed to place order. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="order-page">
@@ -74,13 +88,13 @@ export default function Order() {
           onChange={(e) => setCustomerName(e.target.value)}
           required
         />
-        <input
-          type="email"
-          placeholder="Email"
-          value={customerEmail}
-          onChange={(e) => setCustomerEmail(e.target.value)}
-          required
-        />
+       <input
+         type="email"
+        placeholder="Email"
+        value={customerEmail}
+        onChange={(e) => setCustomerEmail(e.target.value)}
+        required
+/>
         <input
           type="text"
           placeholder="Delivery Address"
@@ -88,13 +102,15 @@ export default function Order() {
           onChange={(e) => setAddress(e.target.value)}
           required
         />
-        <input
-          type="text"
-          placeholder="Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
+       <input type="text"
+         placeholder="Phone Number"
+         value={phone}
+         onChange={(e) => {
+         const value = e.target.value.replace(/\D/g, ""); 
+         setPhone(value.slice(0, 10)); // limit to 10 digits
+  }}
+  required
+/>
       </div>
 
       <div className="order-summary">

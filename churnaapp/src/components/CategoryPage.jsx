@@ -24,8 +24,6 @@ export default function CategoryPage() {
             <h3>{p.name}</h3>
             <p className="description">{p.description}</p>
             <p className="price">₹{p.price}</p>
-
-            {/* Corrected Link */}
             <Link to={`/product/${p._id}`}>
               <button className="add-btn">View Benefits</button>
             </Link>

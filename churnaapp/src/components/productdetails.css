@@ -71,6 +71,15 @@ body {
   line-height: 1.4;
 }
 
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+  
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .product-detail {

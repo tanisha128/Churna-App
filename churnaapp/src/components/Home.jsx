@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
       <p className="price">₹{product.price}</p>
 
       <Link to={`/product/${product._id}`}>
-        <button className="add-btn">View Benefits</button>
+        <button className="add">View Benefits</button>
       </Link>
     </div>
   );

@@ -38,12 +38,12 @@
   color: #305724;
 }
 
-.add-btn {
+.add {
   width: 90%;
   margin-bottom: 1rem;
   padding: 0.6rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 4px;
   background: #fd8124;
   color: #fff;
   font-weight: 600;
@@ -51,16 +51,18 @@
   transition: background 0.25s;
 }
 
-.add-btn:hover {
+.add:hover {
   background: #e6904f;
 }
 
 .quantity-selector {
   display: flex;
   align-items: center;
-  margin-top: 10px; /* Reduced margin-top */
+  margin-top: 10px; 
   justify-content: center;
 }
+
+
 @media (prefers-color-scheme: dark) {
   /* Product grid + cards */
   .product {

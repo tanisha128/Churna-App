@@ -142,6 +142,6 @@
 }
   .Logo img:nth-child(2) {
     display: none; /* Hide the second logo on small screens */
-  }
+  } 
 
 }
