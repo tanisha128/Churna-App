@@ -1,6 +1,6 @@
 .order-page {
   max-width: 800px;
-  margin: 20px auto; /* 100px clears navbar height (80px) + small gap */
+  margin: 40px auto; /* 100px clears navbar height (80px) + small gap */
   padding: 30px;
   background: #ffffff;
   border-radius: 16px;
@@ -8,8 +8,6 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
 }
-
-
 
 .order-page h1 {
   font-size: 2rem;
