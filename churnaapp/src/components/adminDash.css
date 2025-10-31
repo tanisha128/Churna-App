@@ -213,6 +213,10 @@ h2 {
 
 
 /* Table Styles */
+.order h1 {
+  margin-top: 200px;
+}
+
 .order-table
  {
   width: 100%;
@@ -379,6 +383,9 @@ h2 {
   .admin-dashboard h1 {
     margin-top: 70px;
 
+  }
+  .order h1 {
+    margin-top: 190px;
   }
   
 }

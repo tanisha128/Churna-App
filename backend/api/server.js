@@ -15,6 +15,8 @@ const User = require("../model/user");
 
 dotenv.config();
 
+console.log("📦 Loaded .env → EMAIL_USER:", process.env.EMAIL_USER || "❌ Not Found");
+
 const app = express();
 
 app.use(
@@ -58,19 +60,24 @@ app.post("/api/contact", (req, res) => {
     },
   });
 
-  const mailOptions = {
-    from: email,
-    to: process.env.EMAIL_USER,
-    subject: `Contact Form Submission: ${subject}`,
-    text: `
-      First Name: ${firstName}
-      Last Name: ${lastName || "Not provided"}
-      Email: ${email}
-      Phone Number: ${phoneNumber}
-      Subject: ${subject}
-      Message: ${message}
-    `,
-  };
+ const mailOptions = {
+  from: `"${firstName} ${lastName || ""}" <${process.env.EMAIL_USER}>`, // ✅ send using your Gmail
+  to: process.env.EMAIL_USER, // ✅ your inbox (or client inbox)
+  replyTo: email, // ✅ allows "Reply" to go to visitor directly
+  subject: `📩 New Contact Form Submission from ${firstName} ${lastName || ""} - ${subject}`,
+  text: `
+You have received a new message from your website contact form:
+
+👤 Name: ${firstName} ${lastName || "Not provided"}
+📧 Email: ${email}
+📞 Phone: ${phoneNumber}
+📝 Subject: ${subject}
+
+💬 Message:
+${message}
+  `,
+};
+
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
