@@ -2,7 +2,7 @@ const express = require("express");
 const Feedback = require("../model/feedback");
 const router = express.Router();
 
-// ----------- SAVE FEEDBACK -----------
+// Save a new feedback
 router.post("/", async (req, res) => {
   try {
     const { feedback } = req.body;
@@ -11,22 +11,21 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Feedback is required" });
     }
 
-    const savedFeedback = await Feedback.create({ feedback });
-
-    res.json({ message: "Feedback submitted successfully", savedFeedback });
+    const saved = await Feedback.create({ feedback });
+    return res.status(200).json({ message: "Feedback submitted", saved });
   } catch (error) {
-    console.error("Feedback save error:", error);
+    console.error("❌ Feedback save error:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
-// ----------- GET ALL FEEDBACKS (ADMIN) -----------
+// Get all feedback for admin
 router.get("/", async (req, res) => {
   try {
-    const feedbacks = await Feedback.find().sort({ createdAt: -1 });
-    res.json(feedbacks);
+    const list = await Feedback.find().sort({ createdAt: -1 });
+    return res.status(200).json(list);
   } catch (error) {
-    console.error("Feedback fetch error:", error);
+    console.error("❌ Feedback fetch error:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
