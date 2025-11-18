@@ -1,9 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
-// 1. Create Context
 const SearchContext = createContext();
 
-// 2. Provider Component
 export function SearchProvider({ children }) {
   const [searchResults, setSearchResults] = useState([]);
 
@@ -14,9 +12,9 @@ export function SearchProvider({ children }) {
   );
 }
 
-// 3. Custom Hook
 export function useSearch() {
   return useContext(SearchContext);
 }
+
 
 

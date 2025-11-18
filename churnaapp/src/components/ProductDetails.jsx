@@ -87,6 +87,15 @@ export default function ProductDetail() {
           </p>
           <p className="price">₹{product.price}</p>
 
+           {cleanBenefits && (
+        <div className="benefits">
+          <h3>Benefits:</h3>
+          <p style={{ whiteSpace: "pre-line" }}>
+            {cleanDevanagari(product.benefits)}
+          </p>
+        </div>
+      )}
+
           {/* Quantity Selector */}
           <div className="quantity-selector">
             <button
@@ -119,14 +128,7 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {cleanBenefits && (
-        <div className="benefits">
-          <h3>Benefits:</h3>
-          <p style={{ whiteSpace: "pre-line" }}>
-            {cleanDevanagari(product.benefits)}
-          </p>
-        </div>
-      )}
+     
     </div>
   );
 }

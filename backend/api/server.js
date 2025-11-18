@@ -7,11 +7,11 @@ const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 const serverless = require("serverless-http");
-
 const productRoutes = require("../routes/productRoutes");
 const authRoutes = require("../routes/authRoutes");
 const orderRoutes = require("../routes/orderRoutes");
 const User = require("../model/user");
+const feedbackRoutes = require("../routes/feedback");
 
 dotenv.config();
 
@@ -39,6 +39,7 @@ app.use("/pictures", express.static(path.join(__dirname, "pictures")));
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/feedback", feedbackRoutes);
 
 app.get("/api", (req, res) => {
   res.send("✅ Backend running locally or on Vercel");

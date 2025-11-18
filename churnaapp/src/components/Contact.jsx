@@ -97,9 +97,9 @@ const handleSubmit = async (e) => {
  <br />
 
   <span className='number' style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-    +91-9156033505
+    +91-9665171925
     <a
-      href="https://wa.me/919156033505"
+      href="https://wa.me/919665171925"
       target="_blank"
       rel="noopener noreferrer"
       style={{

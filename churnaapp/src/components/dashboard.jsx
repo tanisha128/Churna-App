@@ -178,10 +178,12 @@ const handleUpdateImage = async (id, file) => {
   return (
     <div className='admin-dashboard' >
       <h1>Admin Dashboard</h1>
-<div className="dashboard-buttons">
-        <Link to="/orders" className="btn">View Orders</Link>
-      </div>
+     <div className="dashboard-buttons">
+  <Link to="/orders" className="btn">View Orders</Link>
+  <Link to="/admin/feedback" className="feed-btn">📩 Customer Feedback</Link>
+</div>
 
+      
       <div className='product-management' >
         <h2>Product Management</h2>
         <div className='add-product' >

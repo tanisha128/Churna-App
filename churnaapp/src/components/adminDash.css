@@ -305,16 +305,7 @@ h2 {
   color: #004085;
   font-weight: bold;
 }
-.dashboard-buttons {
-  background: #fd8124;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s;
-  margin-top: 3rem;
-}
+
 @media (max-width: 600px) {
   .product-table,
   .order-table,
@@ -388,4 +379,52 @@ h2 {
     margin-top: 190px;
   }
   
+}
+
+.dashboard-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-buttons .btn,
+.feed-btn {
+  padding: 0.4rem 1rem;
+  background: #fd8124;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.25s, transform 0.1s;
+}
+
+.dashboard-buttons .btn:hover,
+.feed-btn:hover {
+  background: #e6904f;
+  transform: translateY(-2px);
+}
+
+.dashboard-buttons .btn:active,
+.feed-btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .dashboard-buttons {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .dashboard-buttons .btn,
+  .feed-btn {
+    width: 100%;
+    text-align: center;
+  }
 }

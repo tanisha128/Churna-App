@@ -1,0 +1,137 @@
+.floating-feedback-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #25D366; /* WhatsApp green */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 999;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+  transition: 0.2s;
+}
+
+.floating-feedback-btn:hover {
+  transform: scale(1.05);
+  background: #1ebe5d;
+}
+
+.feedback-page {
+  max-width: 600px;
+  margin: 60px auto 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+.feedback-page h1 {
+  text-align: center;
+  color: #305724;
+  font-size: 2rem;
+  
+  font-weight: 700;
+}
+
+.feedback-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feedback-page textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1.5px solid #fd8124;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: 'Noto Sans Devanagari', sans-serif;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s;
+}
+
+.feedback-page textarea:focus {
+  border-color: #305724;
+  box-shadow: 0 0 8px rgba(253, 129, 36, 0.2);
+}
+
+.feedback-page textarea::placeholder {
+  color: #999;
+}
+
+.feedback-page button {
+  padding: 0.8rem 2rem;
+  background: #fd8124;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.1s;
+  align-self: center;
+}
+
+.feedback-page button:hover {
+  background: #e6904f;
+  transform: translateY(-2px);
+}
+
+.feedback-page button:active {
+  transform: translateY(0);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .feedback-page {
+    margin: 60px 1rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .feedback-page h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .feedback-page textarea {
+    padding: 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .feedback-page button {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .feedback-page {
+    background: #1e1e1e;
+    color: #f0f0f0;
+  }
+
+  .feedback-page h1 {
+    color: #90EE90;
+  }
+
+  .feedback-page textarea {
+    background: #2a2a2a;
+    color: #f0f0f0;
+    border-color: #fd8124;
+  }
+
+  .feedback-page textarea::placeholder {
+    color: #999;
+  }
+
+  .feedback-page textarea:focus {
+    border-color: #90EE90;
+    box-shadow: 0 0 8px rgba(144, 238, 144, 0.2);
+  }
+}
