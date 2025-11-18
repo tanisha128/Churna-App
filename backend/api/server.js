@@ -11,7 +11,7 @@ const productRoutes = require("../routes/productRoutes");
 const authRoutes = require("../routes/authRoutes");
 const orderRoutes = require("../routes/orderRoutes");
 const User = require("../model/user");
-const feedbackRoutes = require("../routes/feedback");
+const feedbackRoutes = require("../routes/feedbackRoute");
 
 dotenv.config();
 
